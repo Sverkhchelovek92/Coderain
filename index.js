@@ -13,30 +13,56 @@ const fontSize = 20
 const symbols =
   'アァイィウヴエェオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-let y = 0
-let speed = 2
+const columnX = canvas.width / 2 // center column
+const trailLength = 25 // trail height
+const speed = 100
+
+ctx.font = `${fontSize}px monospace`
+ctx.textAlign = 'center'
+ctx.textBaseline = 'top'
+
+let trail = []
+let headY = 0
+
+function randomChar() {
+  return symbols.charAt(Math.floor(Math.random() * symbols.length))
+}
 
 function draw() {
   ctx.fillStyle = 'black'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-  //Font
-  ctx.fillStyle = '#0F0'
-  ctx.font = `${fontSize}px monospace`
+  // Adding new char
+  trail.unshift({ char: randomChar(), alpha: 1.0 })
 
-  //Random Symbol
-  const char = symbols.charAt(Math.floor(Math.random() * symbols.length))
+  // Draw every char
+  for (let i = 0; i < trail.length; i++) {
+    const item = trail[i]
+    const y = headY - i * fontSize
 
-  const x = canvas.width / 2
-  ctx.fillText(char, x, y)
+    // Ignore symbols out of the borders
+    if (y < -fontSize) continue
+    if (y > canvas.height) break
 
-  y += speed
-
-  if (y > canvas.height) {
-    y = 0
+    // Trail style
+    ctx.fillStyle = `rgba(0, 255, 0, ${item.alpha.toFixed(2)})`
+    ctx.fillText(item.char, columnX, y)
+    item.alpha *= 0.85
   }
 
-  requestAnimationFrame(draw)
+  // Deleting old symbols
+  trail = trail.filter((item) => item.alpha > 0.05)
+
+  // Moving head
+  headY += fontSize
+
+  // Restart if at the bottom
+  if (headY > canvas.height + fontSize * 2) {
+    headY = 0
+    trail = []
+  }
+
+  setTimeout(() => requestAnimationFrame(draw), speed)
 }
 
 draw()
