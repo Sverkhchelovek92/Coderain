@@ -29,7 +29,7 @@ function randomChar() {
 }
 
 function draw() {
-  ctx.fillStyle = 'black'
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.25)'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
   // Adding new char
@@ -45,8 +45,19 @@ function draw() {
     if (y > canvas.height) break
 
     // Trail style
-    ctx.fillStyle = `rgba(0, 255, 0, ${item.alpha.toFixed(2)})`
-    ctx.fillText(item.char, columnX, y)
+    if (i === 0) {
+      ctx.fillStyle = '#ccffcc'
+      ctx.shadowColor = '#0f0'
+      ctx.shadowBlur = 12 // glow effect
+      ctx.fillText(item.char, columnX, y)
+      ctx.shadowBlur = 0
+    } else {
+      // other symbols
+      const brightness = Math.max(item.alpha, 0.1)
+      ctx.fillStyle = `rgba(0, 255, 0, ${brightness})`
+      ctx.fillText(item.char, columnX, y)
+    }
+
     item.alpha *= 0.85
   }
 
