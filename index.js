@@ -9,14 +9,12 @@ function resizeCanvas() {
 resizeCanvas()
 window.addEventListener('resize', resizeCanvas)
 
-// const fontSize = 20
 const symbols =
   'アァイィウヴエェオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 const trailLength = 25 // trail height
 const speed = 100
 
-// ctx.font = `${fontSize}px monospace`
 ctx.textAlign = 'center'
 ctx.textBaseline = 'top'
 
