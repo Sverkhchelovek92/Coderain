@@ -9,20 +9,16 @@ function resizeCanvas() {
 resizeCanvas()
 window.addEventListener('resize', resizeCanvas)
 
-const fontSize = 20
+// const fontSize = 20
 const symbols =
   'アァイィウヴエェオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-const columnX = canvas.width / 2 // center column
 const trailLength = 25 // trail height
 const speed = 100
 
-ctx.font = `${fontSize}px monospace`
+// ctx.font = `${fontSize}px monospace`
 ctx.textAlign = 'center'
 ctx.textBaseline = 'top'
-
-let trail = []
-let headY = 0
 
 function randomChar() {
   return symbols.charAt(Math.floor(Math.random() * symbols.length))
@@ -36,7 +32,10 @@ class Stream {
   }
 
   reset() {
+    this.fontSize = 12 + Math.random() * 16
+
     this.length = Math.floor(10 + Math.random() * 20)
+
     this.y = Math.random() * -canvas.height
     this.trail = []
     this.speed = 80 + Math.random() * 100
@@ -52,20 +51,22 @@ class Stream {
     // delete old chars
     if (this.trail.length > this.length) this.trail.pop()
 
-    this.y += fontSize
+    this.y += this.fontSize
 
-    if (this.y > canvas.height + this.length * fontSize) {
+    if (this.y > canvas.height + this.length * this.fontSize) {
       this.x = Math.random() * canvas.width
       this.reset()
     }
   }
 
   draw() {
+    ctx.font = `${this.fontSize}px monospace`
+
     for (let i = 0; i < this.trail.length; i++) {
       const item = this.trail[i]
-      const y = this.y - i * fontSize
+      const y = this.y - i * this.fontSize
 
-      if (y < -fontSize || y > canvas.height) continue
+      if (y < -this.fontSize || y > canvas.height) continue
 
       if (i === 0) {
         // steam head
