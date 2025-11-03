@@ -19,11 +19,11 @@ canvas {
   right: 20px;
   background: transparent;
   border: none;
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   padding: 0;
   cursor: pointer;
-  opacity: 0.05;
+  opacity: 0.01;
   transition: opacity 0.3s ease, transform 0.2s ease;
   z-index: 10;
 }
