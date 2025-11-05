@@ -107,6 +107,15 @@ draw()
 const settingsBtn = document.getElementById('settings-btn')
 const settingsPopup = document.getElementById('settings-popup')
 
-settingsBtn.addEventListener('click', () => {
+settingsBtn.addEventListener('click', (event) => {
+  event.stopPropagation()
   settingsPopup.classList.toggle('visible')
+})
+
+document.addEventListener('click', (event) => {
+  const isClickInside =
+    settingsPopup.contains(event.target) || settingsBtn.contains(event.target)
+  if (!isClickInside) {
+    settingsPopup.classList.remove('visible')
+  }
 })
