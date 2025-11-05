@@ -101,3 +101,12 @@ function draw() {
 }
 
 draw()
+
+// Settings Pop-up
+
+const settingsBtn = document.getElementById('settings-btn')
+const settingsPopup = document.getElementById('settings-popup')
+
+settingsBtn.addEventListener('click', () => {
+  settingsPopup.classList.toggle('visible')
+})
