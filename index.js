@@ -22,6 +22,9 @@ function randomChar() {
   return symbols.charAt(Math.floor(Math.random() * symbols.length))
 }
 
+// font
+let currentFont = 'monospace'
+
 // stream class
 class Stream {
   constructor(x) {
@@ -58,7 +61,7 @@ class Stream {
   }
 
   draw() {
-    ctx.font = `${this.fontSize}px monospace`
+    ctx.font = `${this.fontSize}px ${currentFont}`
 
     for (let i = 0; i < this.trail.length; i++) {
       const item = this.trail[i]
@@ -118,4 +121,10 @@ document.addEventListener('click', (event) => {
   if (!isClickInside) {
     settingsPopup.classList.remove('visible')
   }
+})
+
+const fontSelect = document.getElementById('font-select')
+
+fontSelect.addEventListener('change', (event) => {
+  currentFont = event.target.value
 })
