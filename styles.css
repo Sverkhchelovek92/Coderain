@@ -75,3 +75,26 @@ canvas {
   font-size: 1.1rem;
   text-align: center;
 }
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#font-select {
+  background: rgba(0, 0, 0, 0.8);
+  color: #0f0;
+  border: 1px solid #0f0;
+  border-radius: 2px;
+  font-family: monospace;
+  padding: 6px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#font-select:hover {
+  background: rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 8px #0f05;
+}
