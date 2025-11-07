@@ -82,7 +82,8 @@ canvas {
   gap: 10px;
 }
 
-#font-select {
+#font-select,
+#color-select {
   background: rgba(0, 0, 0, 0.8);
   color: #0f0;
   border: 1px solid #0f0;
@@ -94,7 +95,8 @@ canvas {
   transition: all 0.2s ease;
 }
 
-#font-select:hover {
+#font-select:hover,
+#color-select:hover {
   background: rgba(0, 255, 0, 0.1);
   box-shadow: 0 0 8px #0f05;
 }
