@@ -25,6 +25,24 @@ function randomChar() {
 // font
 let currentFont = 'monospace'
 
+// raincolor
+
+let currentColor = '#00ff00'
+// let currentShadowColor = '#aaffaa'
+
+let currentRgb = hexToRgb(currentColor)
+
+// defaultColor = '#ccffcc'
+// defaultShadow = ''#aaffaa'
+
+function hexToRgb(hex) {
+  const bigint = parseInt(hex.slice(1), 16)
+  const r = (bigint >> 16) & 255
+  const g = (bigint >> 8) & 255
+  const b = bigint & 255
+  return { r, g, b }
+}
+
 // stream class
 class Stream {
   constructor(x) {
@@ -71,14 +89,16 @@ class Stream {
 
       if (i === 0) {
         // steam head
-        ctx.fillStyle = '#ccffcc'
+        ctx.fillStyle = currentColor
         ctx.shadowColor = '#aaffaa'
         ctx.shadowBlur = 12
         ctx.fillText(item.char, this.x, y)
         ctx.shadowBlur = 0
       } else {
         // steam trail
-        ctx.fillStyle = `rgba(0, 255, 0, ${item.alpha.toFixed(2)})`
+        ctx.fillStyle = `rgba(${currentRgb.r}, ${currentRgb.g}, ${
+          currentRgb.b
+        }, ${item.alpha.toFixed(2)})`
         ctx.fillText(item.char, this.x, y)
       }
     }
@@ -127,4 +147,13 @@ const fontSelect = document.getElementById('font-select')
 
 fontSelect.addEventListener('change', (event) => {
   currentFont = event.target.value
+})
+
+const colorSelect = document.getElementById('color-select')
+
+colorSelect.addEventListener('change', (event) => {
+  const selectedOption = event.target.selectedOptions[0]
+  // console.log(selectedOption)
+  currentColor = selectedOption.value
+  currentRgb = hexToRgb(currentColor)
 })
