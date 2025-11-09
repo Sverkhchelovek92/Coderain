@@ -100,3 +100,8 @@ canvas {
   background: rgba(0, 255, 0, 0.1);
   box-shadow: 0 0 8px #0f05;
 }
+
+@font-face {
+  font-family: 'PressStart2P';
+  src: url('fonts/PressStart2P-Regular.ttf') format('truetype');
+}

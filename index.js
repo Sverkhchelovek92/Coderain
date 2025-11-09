@@ -28,12 +28,8 @@ let currentFont = 'monospace'
 // raincolor
 
 let currentColor = '#00ff00'
-// let currentShadowColor = '#aaffaa'
 
 let currentRgb = hexToRgb(currentColor)
-
-// defaultColor = '#ccffcc'
-// defaultShadow = ''#aaffaa'
 
 function hexToRgb(hex) {
   const bigint = parseInt(hex.slice(1), 16)
@@ -123,7 +119,12 @@ function draw() {
   setTimeout(() => requestAnimationFrame(draw), speed)
 }
 
-draw()
+document.fonts.ready.then(() => {
+  console.log('All fonts are loaded')
+  draw()
+})
+
+// draw()
 
 // Settings Pop-up
 
@@ -153,7 +154,7 @@ const colorSelect = document.getElementById('color-select')
 
 colorSelect.addEventListener('change', (event) => {
   const selectedOption = event.target.selectedOptions[0]
-  // console.log(selectedOption)
+
   currentColor = selectedOption.value
   currentRgb = hexToRgb(currentColor)
 })
