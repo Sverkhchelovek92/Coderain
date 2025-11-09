@@ -28,6 +28,7 @@ let currentFont = 'monospace'
 // raincolor
 
 let currentColor = '#00ff00'
+let currentShadowColor = '#aaffaa'
 
 let currentRgb = hexToRgb(currentColor)
 
@@ -86,7 +87,7 @@ class Stream {
       if (i === 0) {
         // steam head
         ctx.fillStyle = currentColor
-        ctx.shadowColor = '#aaffaa'
+        ctx.shadowColor = currentShadowColor
         ctx.shadowBlur = 12
         ctx.fillText(item.char, this.x, y)
         ctx.shadowBlur = 0
@@ -156,5 +157,6 @@ colorSelect.addEventListener('change', (event) => {
   const selectedOption = event.target.selectedOptions[0]
 
   currentColor = selectedOption.value
+  currentShadowColor = selectedOption.dataset.shadow
   currentRgb = hexToRgb(currentColor)
 })
